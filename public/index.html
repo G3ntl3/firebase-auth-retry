@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="signIn"> Signin with google</button>
+  <div id="disp"></div>
+</body>
+
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+  import {getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCVCK7rmjGe8PAU_FA87Hn6Nrs9h8yxXXI",
+    authDomain: "fire-base-auth-retry.firebaseapp.com",
+    projectId: "fire-base-auth-retry",
+    storageBucket: "fire-base-auth-retry.firebasestorage.app",
+    messagingSenderId: "137253456012",
+    appId: "1:137253456012:web:e5aa0ea201fc42e30013a9"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+
+
+  document.getElementById('signIn').addEventListener('click',()=>{
+signInWithPopup(auth,provider) 
+.then((response)=>{
+  disp.innerHTML=`
+  <img src='${response.user.photoURL}' alt="">
+  <p>welcome ${response.user.displayName} your email is ${response.user.email}</p>
+  
+  `
+console.log(response);
+window.location.href='dashboard.html'
+
+
+
+})
+
+
+
+
+
+})
+
+</script>
+</html>
