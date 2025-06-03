@@ -6,7 +6,10 @@
     <title>Document</title>
   </head>
   <body>
-    <button id="signIn">Signin with google</button>
+    <button id="signIn">Signin with google</button> <br> <br>
+    <button id="signInFacebook">Signin with facebook</button> <br> <br>
+    <button id="signInGithub">Signin with Github</button> <br> <br>
+    <button id="signInX">Signin with Twitter</button>
     <div id="disp"></div>
   </body>
 
@@ -17,7 +20,8 @@
       getAuth,
       signInWithPopup,
       GoogleAuthProvider,
-      sendEmailVerification
+      sendEmailVerification,
+      TwitterAuthProvider
 
     } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
@@ -36,8 +40,11 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
+    const twitterProvider = new TwitterAuthProvider();
     const auth = getAuth();
 
+
+    // Google signin btn
     document.getElementById("signIn").addEventListener("click", () => {
       signInWithPopup(auth, provider).then((response) => {
         disp.innerHTML = `
@@ -64,5 +71,42 @@ console.log('successful');
         
       })
     });
+
+
+    signInX.addEventListener('click',()=>{
+
+
+    // twitter log in btn/ /
+signInWithPopup(auth, twitterProvider)
+  .then((result) => {
+    // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
+    // You can use these server side with your app's credentials to access the Twitter API.
+    const credential = TwitterAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    const secret = credential.secret;
+
+    // The signed-in user info.
+    const user = result.user;
+    console.log(user);
+    
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode);
+    console.log(errorMessage);
+    
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = TwitterAuthProvider.credentialFromError(error);
+    // ...
+  });
+    })
+
+
+
   </script>
 </html>
