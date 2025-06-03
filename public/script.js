@@ -162,13 +162,20 @@ signInGithub.addEventListener('click', ()=>{
 // sign in with email and password
 
 submitDetails.addEventListener('click', () => {
+    event.preventDefault()
     const email = document.getElementById('userEmail').value 
     const userPassword=document.getElementById('userPassword').value
     createUserWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
         // Signed up
         alert("Sign up successful!");
-        alert(0)
+      alert(0)
+      
+      setTimeout(() =>
+      {
+
+        window.location.href='./logIn.js'
+      }, 2000)
       const user = userCredential.user;
       // ...
     })
