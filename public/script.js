@@ -7,7 +7,8 @@
       sendEmailVerification,
       TwitterAuthProvider,
       FacebookAuthProvider,
-      GithubAuthProvider
+      GithubAuthProvider,
+      createUserWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
@@ -154,5 +155,28 @@ signInGithub.addEventListener('click', ()=>{
   });
 
 
+
+})
+
+
+// sign in with email and password
+
+submitDetails.addEventListener('click', () => {
+    const email = document.getElementById('userEmail').value 
+    const userPassword=document.getElementById('userPassword').value
+    createUserWithEmailAndPassword(auth, email, userPassword)
+    .then((userCredential) => {
+        // Signed up
+        alert("Sign up successful!");
+        alert(0)
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+      // ..
+    })
 
 })
