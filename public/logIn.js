@@ -51,11 +51,11 @@ document.getElementById("signIn").addEventListener("click", () => {
         });
 
       console.log(response);
+      window.location.href = "dashboard.html";
     })
     .catch((error) => {
         console.log(error);
     });
-    window.location.href = "dashboard.html";
 });
 
 signInX.addEventListener("click", () => {
@@ -70,8 +70,12 @@ signInX.addEventListener("click", () => {
 
       // The signed-in user info.
       const user = result.user;
+      alert("Sign up successful!");
      
-
+ setTimeout(() => {
+      window.location.href = "dashboard.html";
+        
+    }, 1000)
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -88,10 +92,7 @@ signInX.addEventListener("click", () => {
       // ...
     });
 
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-        
-    }, 2000)
+   
 });
 
 // facebook signin
@@ -105,7 +106,11 @@ signInFacebook.addEventListener("click", () => {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
       const credential = FacebookAuthProvider.credentialFromResult(result);
       const accessToken = credential.accessToken;
-
+      alert("Sign up successful!");
+   setTimeout(() => {
+      window.location.href = "dashboard.html";
+   }, 1000);
+        
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -120,9 +125,7 @@ signInFacebook.addEventListener("click", () => {
 
       // ...
     });
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 2000);
+ 
 });
 
 signInGithub.addEventListener("click", () => {
@@ -135,8 +138,12 @@ signInGithub.addEventListener("click", () => {
       console.log(credential);
       // The signed-in user info.
       const user = result.user;
-      console.log(user);
-
+        console.log(user);
+      alert("Sign up successful!");
+        
+ setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1000);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -150,9 +157,7 @@ signInGithub.addEventListener("click", () => {
       const credential = GithubAuthProvider.credentialFromError(error);
       // ...
     });
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 2000);
+   
 });
 
 // sign in with email and password
@@ -165,11 +170,11 @@ submitDetails.addEventListener("click", () => {
     .then((userCredential) => {
       // Signed up
       alert("Sign up successful!");
-        alert(0);
+ 
         setTimeout(() => {
 
             window.location.href='./dashboard.html'
-        }, 2000);
+        }, 1000);
       const user = userCredential.user;
       // ...
     })
@@ -178,7 +183,5 @@ submitDetails.addEventListener("click", () => {
       const errorMessage = error.message;
       alert(errorMessage);
       // ..
-    }); setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 2000);
+    });
 });
