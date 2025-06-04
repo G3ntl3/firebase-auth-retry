@@ -51,11 +51,11 @@ document.getElementById("signIn").addEventListener("click", () => {
         });
 
       console.log(response);
-      window.location.href = "dashboard.html";
     })
     .catch((error) => {
-      console.log(error);
+        console.log(error);
     });
+    window.location.href = "dashboard.html";
 });
 
 signInX.addEventListener("click", () => {
