@@ -1,5 +1,8 @@
-/* From Uiverse.io by SelfMadeSystem */ 
-.form-container {
+body{
+  background-color: #b8d4c8;
+}
+ 
+ .form-container {
     position: relative;
     perspective: 50rem;
     /* width: ; */
@@ -46,6 +49,7 @@
   .form-title {
     font-size: x-large;
     font-weight: bold;
+    margin: 10px;
   }
   
   :where(.sign-up-form, .log-in-form) label {
