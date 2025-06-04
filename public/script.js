@@ -174,7 +174,7 @@ submitDetails.addEventListener('click', () => {
       setTimeout(() =>
       {
 
-        window.location.href='./logIn.js'
+        window.location.href='./logIn.html'
       }, 2000)
       const user = userCredential.user;
       // ...

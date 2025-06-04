@@ -1,0 +1,178 @@
+/* From Uiverse.io by SelfMadeSystem */ 
+.form-container {
+    position: relative;
+    perspective: 50rem;
+    /* width: ; */
+    height: 30rem;
+     margin: auto;
+  }
+  
+  #switch {
+    display: none;
+  }
+  
+  a{
+    color: white;
+  }
+  .sign-up-form,
+  .log-in-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .sign-up-container,
+  .log-in-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    inset: 0;
+    margin: auto;
+    width: 20rem;
+    height: 20rem;
+    background: #164f37;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .switch-label {
+    font-size: x-small;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .form-title {
+    font-size: x-large;
+    font-weight: bold;
+  }
+  
+  :where(.sign-up-form, .log-in-form) label {
+    font-size: x-small;
+    padding-top: 0.5rem;
+    padding-left: 0.25rem;
+  }
+  
+  :where(.sign-up-form, .log-in-form) input {
+    background-color: #fff2;
+    box-sizing: border-box;
+    color: white;
+    border: 0;
+    border-bottom: 2px solid #cfb2ff;
+    padding: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+  }
+  
+  :where(.sign-up-form, .log-in-form) input:focus-visible {
+    outline: none;
+    border: 1px solid white;
+    border-bottom: 2px solid #cfb2ff;
+  }
+  
+  :where(.sign-up-form, .log-in-form) button {
+    margin-top: auto;
+    background-color: #ffffff4b;
+    color: white;
+    border: 0;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+  
+  .forgot-pwd {
+    font-size: x-small;
+    text-decoration: underline;
+    margin-left: auto;
+    cursor: pointer;
+  }
+  
+  /* Social yoinked from uiverse.io/Yaya12085/short-panda-24 */
+  
+  .social-message {
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  
+  .line {
+    height: 1px;
+    flex: 1 1 0%;
+    background-color: #cfb2ff;
+  }
+  
+  .social-message .message {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #fff;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-icons .icon {
+    border-radius: 0.125rem;
+    padding: 0.75rem;
+    padding-bottom: 0.25rem;
+    border: none;
+    background-color: transparent;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+  
+  .social-icons .icon svg {
+    height: 1.25rem;
+    width: 1.25rem;
+    fill: #fff;
+  }
+  
+  .sign-up-container {
+    animation: hello 0.5s linear forwards;
+  }
+  
+  .log-in-container {
+    animation: unhello 0.5s linear forwards;
+  }
+  
+  #switch:checked ~ .sign-up-container {
+    animation: unhello 0.5s linear forwards;
+  }
+  
+  #switch:checked ~ .log-in-container {
+    animation: hello 0.5s linear forwards;
+  }
+  
+  @keyframes hello {
+    0% {
+      transform: rotateY(-90deg);
+      display: none;
+    }
+    50% {
+      transform: rotateY(-90deg);
+      display: flex;
+    }
+    100% {
+      transform: rotateY(0deg);
+      display: flex;
+    }
+  }
+  
+  @keyframes unhello {
+    0% {
+      transform: rotateY(0deg);
+      display: flex;
+    }
+    50% {
+      transform: rotateY(90deg);
+      display: flex;
+    }
+    100% {
+      transform: rotateY(90deg);
+      display: none;
+    }
+  }
+  
