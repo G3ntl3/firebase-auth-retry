@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import {
   getAuth,
@@ -69,7 +70,7 @@ signInX.addEventListener("click", () => {
 
       // The signed-in user info.
       const user = result.user;
-      console.log(user);
+     
 
       // IdP data available using getAdditionalUserInfo(result)
       // ...
@@ -78,8 +79,7 @@ signInX.addEventListener("click", () => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode);
-      console.log(errorMessage);
+     
 
       // The email of the user's account used.
       const email = error.customData.email;
@@ -87,6 +87,11 @@ signInX.addEventListener("click", () => {
       const credential = TwitterAuthProvider.credentialFromError(error);
       // ...
     });
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+        
+    }, 2000)
 });
 
 // facebook signin
@@ -115,6 +120,9 @@ signInFacebook.addEventListener("click", () => {
 
       // ...
     });
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 2000);
 });
 
 signInGithub.addEventListener("click", () => {
@@ -142,6 +150,9 @@ signInGithub.addEventListener("click", () => {
       const credential = GithubAuthProvider.credentialFromError(error);
       // ...
     });
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 2000);
 });
 
 // sign in with email and password
@@ -167,5 +178,7 @@ submitDetails.addEventListener("click", () => {
       const errorMessage = error.message;
       alert(errorMessage);
       // ..
-    });
+    }); setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 2000);
 });

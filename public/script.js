@@ -130,16 +130,9 @@ signInGithub.addEventListener('click', ()=>{
     // This gives you a GitHub Access Token. You can use it to access the GitHub API.
     const credential = GithubAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
-    console.log(token)
-    console.log(credential);
-    ;
-    
-
-    
-
     // The signed-in user info.
     const user = result.user;
-    console.log(user);
+  
     
     // IdP data available using getAdditionalUserInfo(result)
     // ...
