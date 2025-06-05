@@ -34,7 +34,6 @@ const auth = getAuth();
 
 // Google signin btn
 document.getElementById("signIn").addEventListener("click", () => {
-  const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
     prompt: "select_account",
   });
@@ -64,6 +63,9 @@ document.getElementById("signIn").addEventListener("click", () => {
 
 signInX.addEventListener("click", () => {
   // twitter log in btn/ /
+  twitterProvider.setCustomParameters({
+    prompt: "select_account",
+  });
   signInWithPopup(auth, twitterProvider)
     .then((result) => {
       // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
@@ -103,7 +105,10 @@ signInX.addEventListener("click", () => {
 
 signInFacebook.addEventListener("click", () => {
  
-  signInWithPopup(auth, provider)
+  facebookProvider.setCustomParameters({
+    prompt: "select_account",
+  });
+  signInWithPopup(auth, facebookProvider)
     .then((result) => {
       // The signed-in user info.
       const user = result.user;
@@ -134,6 +139,9 @@ signInFacebook.addEventListener("click", () => {
 });
 
 signInGithub.addEventListener("click", () => {
+  GithubAuthProvider.setCustomParameters({
+    prompt: "select_account",
+  });
   signInWithPopup(auth, Githubprovider)
     .then((result) => {
       // This gives you a GitHub Access Token. You can use it to access the GitHub API.
@@ -169,6 +177,7 @@ signInGithub.addEventListener("click", () => {
 
 submitDetails.addEventListener("click", () => {
   event.preventDefault();
+  
   const email = document.getElementById("userEmail").value;
   const userPassword = document.getElementById("userPassword").value;
   signInWithEmailAndPassword(auth, email, userPassword)
