@@ -39,11 +39,11 @@ document.getElementById("signIn").addEventListener("click", () => {
   });
   signInWithPopup(auth, provider)
     .then((response) => {
-      disp.innerHTML = `
-<img src='${response.user.photoURL}' alt="">
-<p>welcome ${response.user.displayName} your email is ${response.user.email}</p>
+//       disp.innerHTML = `
+// <img src='${response.user.photoURL}' alt="">
+// <p>welcome ${response.user.displayName} your email is ${response.user.email}</p>
 
-`;
+// `;
 
       sendEmailVerification(auth.currentUser)
         .then(() => {
@@ -166,6 +166,7 @@ submitDetails.addEventListener("click", () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       alert(errorMessage);
+
       // ..
     });
 });
