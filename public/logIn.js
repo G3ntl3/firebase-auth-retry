@@ -34,6 +34,10 @@ const auth = getAuth();
 
 // Google signin btn
 document.getElementById("signIn").addEventListener("click", () => {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account",
+  });
   signInWithPopup(auth, provider)
     .then((response) => {
       disp.innerHTML = `
@@ -98,10 +102,7 @@ signInX.addEventListener("click", () => {
 // facebook signin
 
 signInFacebook.addEventListener("click", () => {
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({
-    prompt: "select_account",
-  });
+ 
   signInWithPopup(auth, provider)
     .then((result) => {
       // The signed-in user info.
