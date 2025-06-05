@@ -76,6 +76,7 @@ document.getElementById("signIn").addEventListener("click", () => {
           // The signed-in user info.
           const user = result.user;
           console.log(user);
+          window.location.href = "./dashboard.html";
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...
@@ -113,6 +114,7 @@ document.getElementById("signIn").addEventListener("click", () => {
     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const accessToken = credential.accessToken;
+    window.location.href = "./dashboard.html";
 
     // IdP data available using getAdditionalUserInfo(result)
     // ...
@@ -142,7 +144,7 @@ signInGithub.addEventListener('click', ()=>{
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-  
+  window.location.href='./dashboard.html'
     
     // IdP data available using getAdditionalUserInfo(result)
     // ...
@@ -173,12 +175,11 @@ submitDetails.addEventListener('click', () => {
     .then((userCredential) => {
         // Signed up
         alert("Sign up successful!");
-      alert(0)
       
       setTimeout(() =>
       {
         window.location.href='./logIn.html'
-      }, 2000)
+      }, 1000)
       const user = userCredential.user;
       // ...
     })

@@ -79,7 +79,7 @@ signInX.addEventListener("click", () => {
       alert("Sign up successful!");
      
  setTimeout(() => {
-      window.location.href = "dashboard.html";
+      window.location.href = "./dashboard.html";
         
     }, 1000)
       // IdP data available using getAdditionalUserInfo(result)
@@ -118,7 +118,7 @@ signInFacebook.addEventListener("click", () => {
       const accessToken = credential.accessToken;
       alert("Sign up successful!");
    setTimeout(() => {
-      window.location.href = "dashboard.html";
+      window.location.href = "./dashboard.html";
    }, 1000);
         
       // IdP data available using getAdditionalUserInfo(result)
@@ -155,7 +155,7 @@ signInGithub.addEventListener("click", () => {
       alert("Sign up successful!");
         
  setTimeout(() => {
-      window.location.href = "dashboard.html";
+      window.location.href = "./dashboard.html";
     }, 1000);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
@@ -177,7 +177,7 @@ signInGithub.addEventListener("click", () => {
 
 submitDetails.addEventListener("click", () => {
   event.preventDefault();
-  
+
   const email = document.getElementById("userEmail").value;
   const userPassword = document.getElementById("userPassword").value;
   signInWithEmailAndPassword(auth, email, userPassword)
