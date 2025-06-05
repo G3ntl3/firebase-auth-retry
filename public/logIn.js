@@ -103,40 +103,7 @@ signInX.addEventListener("click", () => {
 
 // facebook signin
 
-signInFacebook.addEventListener("click", () => {
- 
-  facebookProvider.setCustomParameters({
-    prompt: "select_account",
-  });
-  signInWithPopup(auth, facebookProvider)
-    .then((result) => {
-      // The signed-in user info.
-      const user = result.user;
 
-      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential.accessToken;
-      alert("Sign up successful!");
-   setTimeout(() => {
-      window.location.href = "./dashboard.html";
-   }, 1000);
-        
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = FacebookAuthProvider.credentialFromError(error);
-
-      // ...
-    });
- 
-});
 
 signInGithub.addEventListener("click", () => {
   GithubAuthProvider.setCustomParameters({
