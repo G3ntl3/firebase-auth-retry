@@ -21,6 +21,8 @@ const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
   if (user) {
     disp.innerHTML = `<p> sup ${user.displayName}</p>`;
+
+
   } else {
     window.location.href = "index.html";
     console.log("user is not signed in");
@@ -36,3 +38,12 @@ signOutbtn.addEventListener("click", () => {
       console.log(error);
     });
 });
+
+
+addNote.addEventListener('click', () => {
+  alert(noteEntered.value)
+
+
+
+
+})
