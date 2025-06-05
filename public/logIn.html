@@ -8,42 +8,44 @@
   </head>
   <body>
 
-
-
-
 <div class="form-container">
     <input checked="" type="checkbox" id="switch" />
-
 
     <div class="log-in-container">
       <span class="form-title">Login</span>
       <a href="./index.html" for="switch" class="switch-label">Don't have an account?</a>
-      <div class="log-in-form">
-        <label for="email-log-in">Email</label>
+      
+      <!-- FIXED: Added proper form element with onsubmit prevention -->
+      <form class="log-in-form" onsubmit="event.preventDefault(); return false;">
+        <label for="userEmail">Email</label>
         <input
           class="input"
           placeholder="jonny_doe@example.com"
-          id="email-log-in"
+          id="userEmail"
           name="Email"
           type="email"
+          required
         />
-        <label for="pwd-log-in">Password</label>
+        <label for="userPassword">Password</label>
         <input
           class="input"
           placeholder="••••••••"
-          id="pwd-log-in"
+          id="userPassword"
           name="Password"
           type="password"
+          required
         />
         <a class="forgot-pwd">Forgot password?</a>
-        <button type="button">Login</button>
+        <!-- FIXED: Added proper ID and type="submit" -->
+        <button type="submit" id="submitDetails">Login</button>
+        
         <div class="social-message">
           <div class="line"></div>
           <p class="message">Login with social accounts</p>
           <div class="line"></div>
         </div>
         <div class="social-icons">
-          <button aria-label="Log in with Google" class="icon">
+          <button type="button" id="signIn" aria-label="Log in with Google" class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -54,7 +56,7 @@
               ></path>
             </svg>
           </button>
-          <button aria-label="Log in with Twitter" class="icon">
+          <button type="button" id="signInX" aria-label="Log in with Twitter" class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -65,7 +67,7 @@
               ></path>
             </svg>
           </button>
-          <button aria-label="Log in with GitHub" class="icon">
+          <button type="button" id="signInGithub" aria-label="Log in with GitHub" class="icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"
@@ -76,8 +78,7 @@
               ></path>
             </svg>
           </button>
-          <button id="signInFacebook" class="icon facebook">
-          
+          <button type="button" id="signInFacebook" class="icon facebook">
             <svg
               viewBox="0 0 320 512"
               height="1.2em"
@@ -90,31 +91,10 @@
             </svg>
           </button>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  </body>
 
 <script type="module" src="./logIn.js"></script>
-
+</body>
 </html>
