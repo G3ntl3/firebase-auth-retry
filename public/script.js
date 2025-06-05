@@ -53,7 +53,7 @@ document.getElementById("signIn").addEventListener("click", () => {
             });
 
           console.log(response);
-          window.location.href = "dashboard.html";
+          window.location.href = "./dashboard.html";
         })
         .catch((error) => {
           console.log(error);
