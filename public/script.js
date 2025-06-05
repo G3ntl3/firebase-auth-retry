@@ -154,6 +154,7 @@ signInGithub.addEventListener('click', ()=>{
 
 // sign in with email and password
 
+
 submitDetails.addEventListener('click', () => {
     event.preventDefault()
     const email = document.getElementById('userEmail').value 
@@ -166,7 +167,6 @@ submitDetails.addEventListener('click', () => {
       
       setTimeout(() =>
       {
-
         window.location.href='./logIn.html'
       }, 2000)
       const user = userCredential.user;
