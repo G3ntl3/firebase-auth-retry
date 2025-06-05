@@ -108,7 +108,7 @@ signInX.addEventListener("click", () => {
 
 
 signInGithub.addEventListener("click", () => {
-  GithubAuthProvider.setCustomParameters({
+  GithubProvider.setCustomParameters({
     prompt: "select_account",
   });
   signInWithPopup(auth, Githubprovider)
