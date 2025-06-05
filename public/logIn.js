@@ -54,7 +54,7 @@ document.getElementById("signIn").addEventListener("click", () => {
         });
 
       console.log(response);
-      window.location.href = "./dashboard.html";
+      // window.location.href = "./dashboard.html";
     })
     .catch((error) => {
         console.log(error);
@@ -76,10 +76,12 @@ signInX.addEventListener("click", () => {
 
       // The signed-in user info.
       const user = result.user;
+      console.log(user);
+      
       alert("Sign up successful!");
      
  setTimeout(() => {
-      window.location.href = "./dashboard.html";
+      // window.location.href = "./dashboard.html";
         
     }, 1000)
       // IdP data available using getAdditionalUserInfo(result)
@@ -122,7 +124,7 @@ signInGithub.addEventListener("click", () => {
       alert("Sign up successful!");
         
  setTimeout(() => {
-      window.location.href = "./dashboard.html";
+      // window.location.href = "./dashboard.html";
     }, 1000);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
@@ -151,10 +153,11 @@ submitDetails.addEventListener("click", () => {
     .then((userCredential) => {
       // Signed up
       alert("Sign up successful!");
+ console.log(userCredential);
  
         setTimeout(() => {
 
-            window.location.href='./dashboard.html'
+            // window.location.href='./dashboard.html'
         }, 1000);
       const user = userCredential.user;
       // ...
