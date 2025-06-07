@@ -59,6 +59,7 @@ let databaseRef= ref(database,'noteStorage')
   }
   set(databaseRef,noteObject)
   alert(noteEntered.value)
+  noteObject.noteEntered=''
   displayNotes.innerHTML += `
 
 <div class="card" style="width: 18rem;">
