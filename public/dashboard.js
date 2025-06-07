@@ -4,6 +4,8 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+import { getDatabase, ref,set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCVCK7rmjGe8PAU_FA87Hn6Nrs9h8yxXXI",
@@ -12,11 +14,14 @@ const firebaseConfig = {
   storageBucket: "fire-base-auth-retry.firebasestorage.app",
   messagingSenderId: "137253456012",
   appId: "1:137253456012:web:e5aa0ea201fc42e30013a9",
+  databaseURL: "https://fire-base-auth-retry-default-rtdb.firebaseio.com",  
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+const database = getDatabase(app);
+
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -39,14 +44,24 @@ signOutbtn.addEventListener("click", () => {
     });
 });
 
+// function for adding note
 
 addNote.addEventListener('click', () => {
+let databaseRef= ref(database,'noteStorage')
+  const date= new Date()
+  let noteObject = {
+    noteEntered: noteEntered.value,
+    nameOfInUser: auth.currentUser.displayName,
+    time: date.toLocaleTimeString
+  }
+  set(databaseRef,noteObject)
   alert(noteEntered.value)
   displayNotes.innerHTML += `
 
 <div class="card" style="width: 18rem;">
 <div class="card-body">
-<p class="card-text">${noteEntered.value}</p>
+<p class="card-text">${noteObject.noteEntered}</p>
+<small> ${noteObject.time}</small>
 </div>
 </div>
 
