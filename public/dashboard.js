@@ -70,7 +70,7 @@ let databaseRef= ref(database,'noteStorage')
   
   
   `;
-  // noteObject.noteEntered=''
+noteEntered.value=' '
 // <img src="..." class="card-img-top" alt="...">
 
 
