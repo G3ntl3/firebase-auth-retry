@@ -54,7 +54,7 @@ signOutbtn.addEventListener("click", () => {
 // function for adding note
 
 addNote.addEventListener("click", () => {
-  let databaseRef = ref(database, "noteStorage");
+  let databaseRef = ref(database, `noteStorage/${user.uid}`);
   const date = new Date();
   let noteObject = {
     noteEntered: noteEntered.value,
