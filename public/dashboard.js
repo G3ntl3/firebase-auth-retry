@@ -50,7 +50,7 @@ signOutbtn.addEventListener("click", () => {
 // function for adding note
 
 addNote.addEventListener('click', () => {
-let databaseRef= ref(database,'noteStorage')
+let databaseRef= ref(database,'noteStorage/0')
   const date= new Date()
   let noteObject = {
     noteEntered: noteEntered.value,
@@ -58,7 +58,7 @@ let databaseRef= ref(database,'noteStorage')
     time: date.toLocaleTimeString()
   }
   set(databaseRef,noteObject)
-  alert(noteEntered.value)
+  // alert(noteEntered.value)
   displayNotes.innerHTML += `
   
   <div class="card" style="width: 18rem;">
