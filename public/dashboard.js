@@ -11,6 +11,7 @@ import {
   getDatabase,
   ref,
   set,
+  push,
   onValue,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
@@ -53,37 +54,38 @@ signOutbtn.addEventListener("click", () => {
 // function for adding note
 
 addNote.addEventListener("click", () => {
-  let databaseRef = ref(database, "noteStorage/1");
+  let databaseRef = ref(database, "noteStorage");
   const date = new Date();
   let noteObject = {
     noteEntered: noteEntered.value,
     nameOfInUser: auth.currentUser.displayName,
     time: date.toLocaleTimeString(),
   };
-  set(databaseRef, noteObject);
+  push(databaseRef, noteObject);
   // display info from the databse
-  let noteref = ref(database, "noteStorage");
-  onValue(noteref, (snapshot) => {
-    let data = snapshot.val();
-    console.log(data);
-    data.map((eachNote) => {
-      displayNotes.innerHTML += `
-  
-  <div class="card" style="width: 18rem;">
-  <div class="card-body">
-<h1> ${eachNote.nameOfInUser}</h1>
-  <p class="card-text">${eachNote.noteEntered}</p>
-  <small> ${eachNote.time}</small>
 
-  </div>
-  </div>
-  
-  
-  `;
-    });
-  });
   // alert(noteEntered.value)
 
-  noteEntered.value = " ";
+  // noteEntered.value = " ";
   // <img src="..." class="card-img-top" alt="...">
+});
+let noteref = ref(database, "noteStorage");
+onValue(noteref, (snapshot) => {
+  let data = snapshot.val();
+  console.log(data);
+  data.map((eachNote) => {
+    displayNotes.innerHTML += `
+
+<div class="card" style="width: 18rem;">
+<div class="card-body">
+<h1> ${eachNote.nameOfInUser}</h1>
+<p class="card-text">${eachNote.noteEntered}</p>
+<small> ${eachNote.time}</small>
+
+</div>
+</div>
+
+
+`;
+  });
 });
