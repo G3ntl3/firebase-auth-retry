@@ -69,7 +69,7 @@ addNote.addEventListener("click", () => {
   // noteEntered.value = " ";
   // <img src="..." class="card-img-top" alt="...">
 });
-let noteref = ref(database, "noteStorage");
+let noteref = ref(database, `noteStorage/${noteindex}`);
 onValue(noteref, (snapshot) => {
   let data = snapshot.val();
   displayNotes.innerHTML = ""; // Clear previous notes
