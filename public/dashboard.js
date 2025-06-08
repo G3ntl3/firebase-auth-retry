@@ -4,7 +4,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-import { getDatabase, ref,set } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+import { getDatabase, ref,set, onValue } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 
 const firebaseConfig = {
@@ -50,14 +50,23 @@ signOutbtn.addEventListener("click", () => {
 // function for adding note
 
 addNote.addEventListener('click', () => {
-let databaseRef= ref(database,'noteStorage/0')
+let databaseRef= ref(database,'noteStorage/1')
   const date= new Date()
   let noteObject = {
     noteEntered: noteEntered.value,
     nameOfInUser: auth.currentUser.displayName,
     time: date.toLocaleTimeString()
   }
-  set(databaseRef,noteObject)
+  set(databaseRef, noteObject)
+  // display info from the databse 
+  let noteref = ref(database, 'noteStorage')
+  onValue(noteref, (snapshot) => {
+    
+    let data = snapshot.val()
+    console.log(data);
+    
+
+  })
   // alert(noteEntered.value)
   displayNotes.innerHTML += `
   
