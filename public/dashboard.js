@@ -56,6 +56,7 @@ onAuthStateChanged(auth, (user) => {
     let databaseRef = ref(database, `noteStorage/${user.uid}`);
     const date = new Date();
     let noteObject = {
+      noteTitle:noteTitle.value,
       noteEntered: noteEntered.value,
       nameOfInUser: auth.currentUser.displayName,
       time: date.toLocaleTimeString(),
@@ -78,6 +79,10 @@ onAuthStateChanged(auth, (user) => {
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h1>${eachNote.nameOfInUser}</h1>
+<button class="bg-primary">Edit</button>
+
+<button class="bg-danger">Delete</button>
+            
             <p class="card-text">${eachNote.noteEntered}</p>
             <small>${eachNote.time}</small>
           </div>
