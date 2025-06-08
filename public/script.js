@@ -44,13 +44,13 @@ document.getElementById("signIn").addEventListener("click", () => {
   
   `;
 
-          sendEmailVerification(auth.currentUser)
-            .then(() => {
-              console.log("successful");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          // sendEmailVerification(auth.currentUser)
+          //   .then(() => {
+          //     console.log("successful");
+          //   })
+          //   .catch((err) => {
+          //     console.log(err);
+          //   });
 
           console.log(response);
           window.location.href = "./dashboard.html";
@@ -112,6 +112,7 @@ signInGithub.addEventListener('click', ()=>{
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+
   window.location.href='./dashboard.html'
     
     // IdP data available using getAdditionalUserInfo(result)
