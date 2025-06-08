@@ -1,11 +1,18 @@
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import {
+  initializeApp,
+  getApps,
+} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
 import {
   getAuth,
   onAuthStateChanged,
   signOut,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-import { getDatabase, ref,set, onValue } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
-
+import {
+  getDatabase,
+  ref,
+  set,
+  onValue,
+} from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCVCK7rmjGe8PAU_FA87Hn6Nrs9h8yxXXI",
@@ -14,7 +21,7 @@ const firebaseConfig = {
   storageBucket: "fire-base-auth-retry.firebasestorage.app",
   messagingSenderId: "137253456012",
   appId: "1:137253456012:web:e5aa0ea201fc42e30013a9",
-  databaseURL: "https://fire-base-auth-retry-default-rtdb.firebaseio.com",  
+  databaseURL: "https://fire-base-auth-retry-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
@@ -24,13 +31,9 @@ const app =
 const auth = getAuth();
 const database = getDatabase(app);
 
-
-
 onAuthStateChanged(auth, (user) => {
   if (user) {
     disp.innerHTML = `<p> sup ${user.displayName}</p>`;
-
-
   } else {
     window.location.href = "index.html";
     console.log("user is not signed in");
@@ -49,39 +52,38 @@ signOutbtn.addEventListener("click", () => {
 
 // function for adding note
 
-addNote.addEventListener('click', () => {
-let databaseRef= ref(database,'noteStorage/1')
-  const date= new Date()
+addNote.addEventListener("click", () => {
+  let databaseRef = ref(database, "noteStorage/1");
+  const date = new Date();
   let noteObject = {
     noteEntered: noteEntered.value,
     nameOfInUser: auth.currentUser.displayName,
-    time: date.toLocaleTimeString()
-  }
-  set(databaseRef, noteObject)
-  // display info from the databse 
-  let noteref = ref(database, 'noteStorage')
+    time: date.toLocaleTimeString(),
+  };
+  set(databaseRef, noteObject);
+  // display info from the databse
+  let noteref = ref(database, "noteStorage");
   onValue(noteref, (snapshot) => {
-    
-    let data = snapshot.val()
+    let data = snapshot.val();
     console.log(data);
-    
-
-  })
-  // alert(noteEntered.value)
-  displayNotes.innerHTML += `
+    data.map((eachNote) => {
+      displayNotes.innerHTML += `
   
   <div class="card" style="width: 18rem;">
   <div class="card-body">
-  <p class="card-text">${noteObject.noteEntered}</p>
-  <small> ${noteObject.time}</small>
+<h1> ${eachNote.nameOfInUser}</h1>
+  <p class="card-text">${eachNote.noteEntered}</p>
+  <small> ${eachNote.time}</small>
+
   </div>
   </div>
   
   
   `;
-noteEntered.value=' '
-// <img src="..." class="card-img-top" alt="...">
+    });
+  });
+  // alert(noteEntered.value)
 
-
-
-})
+  noteEntered.value = " ";
+  // <img src="..." class="card-img-top" alt="...">
+});
