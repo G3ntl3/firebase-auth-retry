@@ -72,20 +72,20 @@ addNote.addEventListener("click", () => {
 let noteref = ref(database, "noteStorage");
 onValue(noteref, (snapshot) => {
   let data = snapshot.val();
-  console.log(data);
-  data.map((eachNote) => {
-    displayNotes.innerHTML += `
-
-<div class="card" style="width: 18rem;">
-<div class="card-body">
-<h1> ${eachNote.nameOfInUser}</h1>
-<p class="card-text">${eachNote.noteEntered}</p>
-<small> ${eachNote.time}</small>
-
-</div>
-</div>
-
-
-`;
-  });
+  displayNotes.innerHTML = ""; // Clear previous notes
+  if (data) {
+    Object.values(data).forEach((eachNote) => {
+      displayNotes.innerHTML += `
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h1>${eachNote.nameOfInUser}</h1>
+            <p class="card-text">${eachNote.noteEntered}</p>
+            <small>${eachNote.time}</small>
+          </div>
+        </div>
+      `;
+    });
+  } else {
+    displayNotes.innerHTML = "<p>No notes yet.</p>";
+  }
 });
