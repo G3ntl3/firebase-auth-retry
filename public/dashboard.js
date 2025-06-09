@@ -72,16 +72,16 @@ onAuthStateChanged(auth, (user) => {
   let noteref = ref(database, `noteStorage/${user.uid}`);
   onValue(noteref, (snapshot) => {
     let data = snapshot.val();
-    displayNotes.innerHTML = ""; // Clear previous notes
+    displayNotes.innerHTML = ""; 
     if (data) {
       Object.values(data).forEach((eachNote) => {
         displayNotes.innerHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <h1>${eachNote.nameOfInUser}</h1>
-<button class="bg-primary">Edit</button>
+<button class="bg-primary"  id='editBtn'>Edit</button>
 
-<button class="bg-danger">Delete</button>
+<button class="bg-danger" id='deleteBtn'>Delete</button>
             
             <p class="card-text">${eachNote.noteEntered}</p>
             <small>${eachNote.time}</small>
