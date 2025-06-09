@@ -190,8 +190,8 @@ submitDetails.addEventListener('click', () => {
         toast("Enter a strong passsword", "yellow", "white");
       } else if (errorCode == "auth/email-already-in-use") {
         toast(
-          "Email already in use, proceed to log in page", '',
-          "yellow",
+          "Email already in use, proceed to log in page",
+          "grey",
           "white"
         );
       } else if (errorCode == "auth/network-request-failed") {
