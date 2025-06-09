@@ -33,7 +33,7 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 // error handling with toastify 
 // dynamically handle error with toastify
-const toast = (text, bgColor,textColor) => {
+const toast = (text, destination,bgColor,textColor) => {
   
 Toastify({
   text: text,
@@ -61,7 +61,10 @@ document.getElementById("signIn").addEventListener("click", () => {
         .then((response) => {
 
           console.log(response);
-          window.location.href = "./dashboard.html";
+          toast("Sign in with Github successful✔️", "", "green", "white");
+          setTimeout(() => {
+            window.location.href = "./dashboard.html";
+          }, 1500);
         })
         .catch((error) => {
           console.log(error);
@@ -84,7 +87,10 @@ document.getElementById("signIn").addEventListener("click", () => {
           // The signed-in user info.
           const user = result.user;
           console.log(user);
-          window.location.href = "./dashboard.html";
+          toast("Sign in with Twitter successful✔️", "", "green", "white");
+          setTimeout(() => {
+            window.location.href = "./dashboard.html";
+          }, 1500);
 
           // IdP data available using getAdditionalUserInfo(result)
           // ...
@@ -120,8 +126,10 @@ signInGithub.addEventListener('click', ()=>{
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-
-  window.location.href='./dashboard.html'
+    toast("Sign in with Github successful✔️", "", "green", "white");
+    setTimeout(() => {
+      window.location.href = "./dashboard.html";
+    }, 1500);
     
     // IdP data available using getAdditionalUserInfo(result)
     // ...
