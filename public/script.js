@@ -28,7 +28,7 @@
     const facebookProvider = new FacebookAuthProvider();
     const Githubprovider = new GithubAuthProvider()
 const auth = getAuth();
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
     
 
@@ -183,11 +183,32 @@ submitDetails.addEventListener('click', () => {
       
       if (errorCode == "auth/invalid-email") {
         toast("Enter a valid email 🤷‍♂️", "red", "white");
+      } else if (errorCode == "auth/missing-password") {
+        toast("Passsword cannot be blank", "red", "white");
+      } else if (errorCode == "auth/missing-email") {
+        toast("Email cannot be blank", "red", "white");
+      } else if (errorCode == "auth/weak-password") {
+        toast("Enter a strong passsword", "yellow", "white");
+      } else if (errorCode == "auth/email-already-in-use") {
+        toast(
+          "Email already in use, proceed to log in page",
+          "yellow",
+          "white"
+        );
+      } else if (errorCode == "auth/network-request-failed") {
+        toast(
+          "Network issue! Don't fret, check your connectivity and refresh 👌",
+          "yellow",
+          "white"
+        );
       }
-      else if (errorCode == 'auth/missing-password') {
-        toast("Enter a valid email 🤷‍♂️", "red", "white");
-
-      }
+       else if (errorCode == "auth/internal-error") {
+         toast(
+           "Something went wrong refresh 👌",
+           "yellow",
+           "white"
+         );
+       }
         
       console.log(errorCode);
       
