@@ -80,7 +80,8 @@ onAuthStateChanged(auth, (user) => {
           <div class="card-body">
             <h1>${eachNote.nameOfInUser}</h1>
 
-            
+                        <p class="card-text">${eachNote.noteTitle}</p>
+
             <p class="card-text">${eachNote.noteEntered}</p>
             <small>${eachNote.time}</small>
 
