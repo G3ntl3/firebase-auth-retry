@@ -56,7 +56,7 @@ onAuthStateChanged(auth, (user) => {
     let databaseRef = ref(database, `noteStorage/${user.uid}`);
     const date = new Date();
     let noteObject = {
-      noteTitle:noteTitle.value,
+      noteTitle: noteTitle.value,
       noteEntered: noteEntered.value,
       nameOfInUser: auth.currentUser.displayName,
       time: date.toLocaleTimeString(),
@@ -72,7 +72,7 @@ onAuthStateChanged(auth, (user) => {
   let noteref = ref(database, `noteStorage/${user.uid}`);
   onValue(noteref, (snapshot) => {
     let data = snapshot.val();
-    displayNotes.innerHTML = ""; 
+    displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
         displayNotes.innerHTML += `
@@ -81,7 +81,7 @@ onAuthStateChanged(auth, (user) => {
             <h1>${eachNote.nameOfInUser}</h1>
 
                         <p class="card-text">${eachNote.noteTitle}</p>
-
+<hr>
             <p class="card-text">${eachNote.noteEntered}</p>
             <small>${eachNote.time}</small>
 
