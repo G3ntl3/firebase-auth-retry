@@ -38,15 +38,6 @@ document.getElementById("signIn").addEventListener("click", () => {
   });
       signInWithPopup(auth, provider)
         .then((response) => {
- 
-
-          // sendEmailVerification(auth.currentUser)
-          //   .then(() => {
-          //     console.log("successful");
-          //   })
-          //   .catch((err) => {
-          //     console.log(err);
-          //   });
 
           console.log(response);
           window.location.href = "./dashboard.html";
@@ -56,8 +47,8 @@ document.getElementById("signIn").addEventListener("click", () => {
         });
     });
 
+    // twitter log in btn/ /
     signInX.addEventListener("click", () => {
-      // twitter log in btn/ /
       twitterProvider.setCustomParameters({
         prompt: "select_account",
       });
@@ -151,7 +142,9 @@ submitDetails.addEventListener('click', () => {
     .catch((error) => {
       const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+      console.log(errorMessage);
+      console.log(errorCode);
+      
       // ..
     })
 
