@@ -57,8 +57,11 @@ document.getElementById("signIn").addEventListener("click", () => {
   });
   signInWithPopup(auth, provider)
     .then((response) => {
-
-      window.location.href = "./dashboard.html";
+      toast("Sign in with google successful✔️", "", "green", "white");
+      setTimeout(() => {
+        window.location.href = "./dashboard.html";
+        
+      }, 1500)
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -95,12 +98,10 @@ signInX.addEventListener("click", () => {
       const user = result.user;
       console.log(user);
       
-      alert("Sign up successful!");
-     
- setTimeout(() => {
-      window.location.href = "./dashboard.html";
-        
-    }, 1000)
+      toast("Sign in with Twitter successful✔️", "", "green", "white");
+      setTimeout(() => {
+        window.location.href = "./dashboard.html";
+      }, 1500);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -143,11 +144,10 @@ signInGithub.addEventListener("click", () => {
       // The signed-in user info.
       const user = result.user;
         console.log(user);
-      alert("Sign up successful!");
-        
- setTimeout(() => {
-      window.location.href = "./dashboard.html";
-    }, 1000);
+        toast("Sign in with Github successful✔️", "", "green", "white");
+        setTimeout(() => {
+          window.location.href = "./dashboard.html";
+        }, 1500);
       // IdP data available using getAdditionalUserInfo(result)
       // ...
     })
@@ -182,7 +182,7 @@ submitDetails.addEventListener("click", () => {
     .then((userCredential) => {
       // Signed up
       // alert("Sign up successful!");
-      toast("Log in successful", "green", "white");
+      toast("Log in successful",'', "green", "white");
 
  console.log(userCredential);
  
