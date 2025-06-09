@@ -163,11 +163,11 @@ submitDetails.addEventListener('click', () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       
-      if (errorMessage == "auth/invalid-email") {
+      if (errorCode == "auth/invalid-email") {
         alert('email isshh')
         toast("Enter a valid email 🤷‍♂️", "red", "white");
       }
-      else if (errorMessage == 'auth/missing-password') {
+      else if (errorCode == 'auth/missing-password') {
         alert('password isshh')
       }
         
