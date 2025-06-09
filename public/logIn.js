@@ -57,20 +57,23 @@ document.getElementById("signIn").addEventListener("click", () => {
   });
   signInWithPopup(auth, provider)
     .then((response) => {
-//       disp.innerHTML = `
-// <img src='${response.user.photoURL}' alt="">
-// <p>welcome ${response.user.displayName} your email is ${response.user.email}</p>
 
-// `;
       window.location.href = "./dashboard.html";
     })
     .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode == "auth/popup-blocked") {
+        toast("Browser is preventing popup", "", "red", "white");
+      } else if (errorCode == "auth/cancelled-popup-request") {
+        toast("Pop up cancellled ", "", "red", "white");
+      }
         console.log(error);
     });
 });
 
+// twitter log in btn/ /
 signInX.addEventListener("click", () => {
-  // twitter log in btn/ /
   twitterProvider.setCustomParameters({
     prompt: "select_account",
   });
@@ -105,6 +108,11 @@ signInX.addEventListener("click", () => {
       const email = error.customData.email;
       // The AuthCredential type that was used.
       const credential = TwitterAuthProvider.credentialFromError(error);
+      if (errorCode == "auth/popup-blocked") {
+        toast("Browser is preventing popup", "", "red", "white");
+      } else if (errorCode == "auth/cancelled-popup-request") {
+        toast("Pop up cancellled ", "", "red", "white");
+      }
       // ...
     });
 
@@ -146,7 +154,14 @@ signInGithub.addEventListener("click", () => {
       // The AuthCredential type that was used.
       const credential = GithubAuthProvider.credentialFromError(error);
       // ...
+
+      if (errorCode == "auth/popup-blocked") {
+        toast("Browser is preventing popup", "", "red", "white");
+      } else if (errorCode == "auth/cancelled-popup-request") {
+        toast("Pop up cancellled ", "", "red", "white");
+      }
     });
+  
    
 });
 
@@ -187,10 +202,15 @@ submitDetails.addEventListener("click", () => {
           "white"
         );
       } else if (errorCode == "auth/wrong-password") {
-        toast("Wrong password🤷‍♂️", "", "red", "white");
+        toast("Enter correct password🤷‍♂️", "", "red", "white");
+      } else if (errorCode == "auth/missing-password") {
+        toast("Missing password🤷‍♂️", "", "red", "white");
       } else if (errorCode == "auth/popup-blocked") {
         toast("Browser is preventing popup", "", "red", "white");
+      } else if (errorCode == "auth/cancelled-popup-request") {
+        toast("Pop up cancellled ", "", "red", "white");
       }
+
       
 
       // ..
