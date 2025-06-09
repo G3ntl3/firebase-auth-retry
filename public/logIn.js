@@ -66,8 +66,9 @@ document.getElementById("signIn").addEventListener("click", () => {
       if (errorCode == "auth/popup-blocked") {
         toast("Browser is preventing popup", "", "red", "white");
       } else if (errorCode == "auth/cancelled-popup-request") {
-        toast("Pop up cancellled ", "", "red", "white");
+        toast("Pop up cancelled", "", "red", "white");
       }
+    
         console.log(error);
     });
 });
