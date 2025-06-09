@@ -39,7 +39,7 @@ Toastify({
   duration: 2000,
   close: true,
   gravity: "top", // `top` or `bottom`
-  position: "left", // `left`, `center` or `right`
+  position: "center", // `left`, `center` or `right`
   stopOnFocus: true, // Prevents dismissing of toast on hover
   style: {
     background: bgColor,
@@ -48,7 +48,6 @@ Toastify({
   onClick: function () {}, // Callback after click
 }).showToast();
 }
-toast('successful', 'green','white')
 
 
 
@@ -151,7 +150,7 @@ submitDetails.addEventListener('click', () => {
     createUserWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
         // Signed up
-        alert("Sign up successful!");
+        toast("successful", "green", "white");
       
       setTimeout(() =>
       {
@@ -162,8 +161,12 @@ submitDetails.addEventListener('click', () => {
     })
     .catch((error) => {
       const errorCode = error.code;
-        const errorMessage = error.message;
-      console.log(errorMessage);
+      const errorMessage = error.message;
+      
+      if (errorMessage == "auth/invalid-email") {
+        toast("Enter a valid email 🤷‍♂️", "red", "white");
+
+      };
       console.log(errorCode);
       
       // ..
