@@ -21,13 +21,15 @@
       appId: "1:137253456012:web:e5aa0ea201fc42e30013a9",
     };
 
-    // Global variables Firebase
+    // Global variables 
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     const twitterProvider = new TwitterAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
     const Githubprovider = new GithubAuthProvider()
 const auth = getAuth();
+const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
     
 
 // error handling with toastify 
@@ -142,11 +144,27 @@ signInGithub.addEventListener('click', ()=>{
 
 // sign in with email and password
 
+// use regex for password validation
+const checkforValidPassword = (password) => {
+  return passwordRegex.test(password);
+};  
+
 
 submitDetails.addEventListener('click', () => {
     event.preventDefault()
     const email = document.getElementById('userEmail').value 
-    const userPassword=document.getElementById('userPassword').value
+  const userPassword = document.getElementById('userPassword').value
+  
+  if (!checkforValidPassword(userPassword)) {
+    toast(
+      "Password must have at least 8 characters, including uppercase, lowercase and numbers",
+      "red",
+      "white"
+    );
+    return;
+  }
+
+
     createUserWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
         // Signed up
@@ -164,11 +182,11 @@ submitDetails.addEventListener('click', () => {
       const errorMessage = error.message;
       
       if (errorCode == "auth/invalid-email") {
-        alert('email isshh')
         toast("Enter a valid email 🤷‍♂️", "red", "white");
       }
       else if (errorCode == 'auth/missing-password') {
-        alert('password isshh')
+        toast("Enter a valid email 🤷‍♂️", "red", "white");
+
       }
         
       console.log(errorCode);
