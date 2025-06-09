@@ -175,7 +175,7 @@ submitDetails.addEventListener("click", () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // alert(errorMessage);
+   console.log(errorMessage);
 
       if (errorCode == "auth/invalid-email") {
         toast("Enter a valid email 🤷‍♂️", "", "red", "white");
