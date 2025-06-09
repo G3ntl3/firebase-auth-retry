@@ -155,6 +155,7 @@ submitDetails.addEventListener('click', () => {
     const email = document.getElementById('userEmail').value 
   const userPassword = document.getElementById('userPassword').value
   
+  
   if (!checkforValidPassword(userPassword)) {
     toast(
       "Password must have at least 8 characters, including uppercase, lowercase and numbers",
@@ -163,7 +164,6 @@ submitDetails.addEventListener('click', () => {
     );
     return;
   }
-
 
     createUserWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
