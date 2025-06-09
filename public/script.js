@@ -10,10 +10,8 @@
       GithubAuthProvider,
       createUserWithEmailAndPassword
     } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
 
-    // Your web app's Firebase configuration
+// Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyCVCK7rmjGe8PAU_FA87Hn6Nrs9h8yxXXI",
       authDomain: "fire-base-auth-retry.firebaseapp.com",
@@ -23,13 +21,36 @@
       appId: "1:137253456012:web:e5aa0ea201fc42e30013a9",
     };
 
-    // Initialize Firebase
+    // Global variables Firebase
     const app = initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     const twitterProvider = new TwitterAuthProvider();
     const facebookProvider = new FacebookAuthProvider();
     const Githubprovider = new GithubAuthProvider()
-    const auth = getAuth();
+const auth = getAuth();
+    
+
+// error handling with toastify 
+// dynamically handle error with toastify
+const toast = (text, bgColor,textColor) => {
+  
+Toastify({
+  text: text,
+  duration: 2000,
+  close: true,
+  gravity: "top", // `top` or `bottom`
+  position: "left", // `left`, `center` or `right`
+  stopOnFocus: true, // Prevents dismissing of toast on hover
+  style: {
+    background: bgColor,
+    color: textColor,
+  },
+  onClick: function () {}, // Callback after click
+}).showToast();
+}
+toast('successful', 'green','white')
+
+
 
     // Google signin btn
 document.getElementById("signIn").addEventListener("click", () => {
