@@ -37,7 +37,7 @@ const toast = (text, bgColor,textColor) => {
   
 Toastify({
   text: text,
-  duration: 2000,
+  duration: 3000,
   close: true,
   gravity: "top", // `top` or `bottom`
   position: "center", // `left`, `center` or `right`

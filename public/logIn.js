@@ -178,10 +178,18 @@ submitDetails.addEventListener("click", () => {
       // alert(errorMessage);
 
       if (errorCode == "auth/invalid-email") {
-        toast("Enter a valid email 🤷‍♂️",'', "red", "white");
-      } else if (errorCode == 'user-not-found') {
-        toast("User not found, Click to proceed to log in",'https://firebase-auth-retry.vercel.app/index.html', "red", "white");
-        
+        toast("Enter a valid email 🤷‍♂️", "", "red", "white");
+      } else if (errorCode == "user-not-found") {
+        toast(
+          "User not found, Click to proceed to sign upn",
+          "https://firebase-auth-retry.vercel.app/index.html",
+          "grey",
+          "white"
+        );
+      } else if (errorCode == "auth/wrong-password") {
+        toast("Wrong password🤷‍♂️", "", "red", "white");
+      } else if (errorCode == "auth/popup-blocked") {
+        toast("Browser is preventing popup", "", "red", "white");
       }
       
 
