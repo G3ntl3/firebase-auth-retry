@@ -11,10 +11,9 @@ import {
   GithubAuthProvider,
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+
+//  Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCVCK7rmjGe8PAU_FA87Hn6Nrs9h8yxXXI",
   authDomain: "fire-base-auth-retry.firebaseapp.com",
@@ -23,8 +22,27 @@ const firebaseConfig = {
   messagingSenderId: "137253456012",
   appId: "1:137253456012:web:e5aa0ea201fc42e30013a9",
 };
+// Toastify for error handling dynamically
+const toast = (text, destination, bgColor, textColor) => {
+  Toastify({
+    text: text,
+    duration: 2000,
+    destination: destination,
 
-// Initialize Firebase
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: bgColor,
+      color: textColor,
+    },
+    onClick: function () {}, // Callback after click
+  }).showToast();
+};
+  
+
+// Global variables and firebase init
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const twitterProvider = new TwitterAuthProvider();
@@ -44,16 +62,6 @@ document.getElementById("signIn").addEventListener("click", () => {
 // <p>welcome ${response.user.displayName} your email is ${response.user.email}</p>
 
 // `;
-
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          console.log("successful");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-      console.log(response);
       window.location.href = "./dashboard.html";
     })
     .catch((error) => {
@@ -152,7 +160,9 @@ submitDetails.addEventListener("click", () => {
   signInWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
       // Signed up
-      alert("Sign up successful!");
+      // alert("Sign up successful!");
+      toast("Log in successful", "green", "white");
+
  console.log(userCredential);
  
         setTimeout(() => {
@@ -165,7 +175,15 @@ submitDetails.addEventListener("click", () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage);
+      // alert(errorMessage);
+
+      if (errorCode == "auth/invalid-email") {
+        toast("Enter a valid email 🤷‍♂️", "red", "white");
+      } else if (errorCode == 'user-not-found') {
+        toast("User not found, Click to proceed to log in",'https://firebase-auth-retry.vercel.app/index.html', "red", "white");
+        
+      }
+      
 
       // ..
     });

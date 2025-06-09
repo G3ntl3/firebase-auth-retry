@@ -28,8 +28,7 @@
     const facebookProvider = new FacebookAuthProvider();
     const Githubprovider = new GithubAuthProvider()
 const auth = getAuth();
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     
 
 // error handling with toastify 
