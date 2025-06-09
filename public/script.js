@@ -61,7 +61,7 @@ document.getElementById("signIn").addEventListener("click", () => {
         .then((response) => {
 
           console.log(response);
-          toast("Sign in with Github successful✔️", "", "green", "white");
+          toast("Sign in with Google successful✔️", "", "green", "white");
           setTimeout(() => {
             window.location.href = "./dashboard.html";
           }, 1500);
