@@ -211,6 +211,8 @@ submitDetails.addEventListener("click", () => {
         toast("Enter correct password🤷‍♂️", "", "red", "white");
       } else if (errorCode == "auth/missing-password") {
         toast("Missing password🤷‍♂️", "", "red", "white");
+      } else if (errorCode == "auth/invalid-credential") {
+        toast("Incorrect emailor password🤷‍♂️", "", "red", "white");
       } else if (errorCode == "auth/popup-blocked") {
         toast("Browser is preventing popup", "", "red", "white");
       } else if (errorCode == "auth/cancelled-popup-request") {
