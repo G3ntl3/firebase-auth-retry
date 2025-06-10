@@ -39,7 +39,7 @@ Toastify({
   text: text,
   duration: 3000,
   close: true,
-  destination:destination,
+  destination: destination,
   gravity: "top", // `top` or `bottom`
   position: "center", // `left`, `center` or `right`
   stopOnFocus: true, // Prevents dismissing of toast on hover
@@ -47,7 +47,11 @@ Toastify({
     background: bgColor,
     color: textColor,
   },
-  onClick: function () {}, // Callback after click
+  onClick: function () {
+    if (destination) {
+      window.location.href = destination;
+    }
+  }, // Callback after click
 }).showToast();
 }
 
