@@ -76,20 +76,8 @@ onAuthStateChanged(auth, (user) => {
     if (data) {
       Object.values(data).forEach((eachNote) => {
         displayNotes.innerHTML += `
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <small>${eachNote.nameOfInUser}</small>
 
-                        <p class="card-text"></p>
-<hr>
-                    <h6 class="card-title">${eachNote.noteTitle}</h6>
-            <p class="card-text">${eachNote.noteEntered}</p>
-            <small>${eachNote.time}</small>
-
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
                     <div class="card note-card fade-up">
                         <div class="card-body">
                             <h6 class="card-title">${eachNote.noteTitle}</h6>
