@@ -76,8 +76,9 @@ onAuthStateChanged(auth, (user) => {
     if (data) {
       Object.values(data).forEach((eachNote) => {
         displayNotes.innerHTML += `
-
-        <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
                     <div class="card note-card fade-up">
                         <div class="card-body">
                             <h6 class="card-title">${eachNote.noteTitle}</h6>
@@ -86,6 +87,11 @@ onAuthStateChanged(auth, (user) => {
                         </div>
                     </div>
                 </div>
+
+          </div>
+        </div>
+
+        
       `;
       });
     } else {
