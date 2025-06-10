@@ -40,14 +40,14 @@ onAuthStateChanged(auth, (user) => {
     console.log("user is not signed in");
   }
 
-  signOutbtn.addEventListener("click", () => {
+ document.getElementById ('signOutbtn').addEventListener("click", () => {
     signOut(auth)
       .then(() => {
         console.log("sign out success");
       })
       .catch((error) => {
         console.log(error);
-      });
+      }); w
   });
 
   // function for adding note
