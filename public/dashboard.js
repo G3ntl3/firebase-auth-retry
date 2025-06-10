@@ -34,9 +34,12 @@ const database = getDatabase(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
+
+
+imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
     console.log(user);
     
-    disp.innerHTML = `<p> sup ${user.displayName}</p>`;
+    // disp.innerHTML = `<p> sup ${user.displayName}</p>`;
   } else {
     window.location.href = "index.html";
     console.log("user is not signed in");
