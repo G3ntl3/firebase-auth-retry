@@ -166,6 +166,7 @@ submitDetails.addEventListener('click', () => {
   if (!checkforValidPassword(userPassword)) {
     toast(
       "Password must have at least 8 characters, including uppercase, lowercase and numbers",
+      " ",
       "red",
       "white"
     );
@@ -175,7 +176,7 @@ submitDetails.addEventListener('click', () => {
     createUserWithEmailAndPassword(auth, email, userPassword)
     .then((userCredential) => {
         // Signed up
-        toast("successful", "green", "white");
+        toast("successful","", "green", "white");
       
       setTimeout(() =>
       {
@@ -189,22 +190,24 @@ submitDetails.addEventListener('click', () => {
       const errorMessage = error.message;
       
       if (errorCode == "auth/invalid-email") {
-        toast("Enter a valid email 🤷‍♂️", "red", "white");
+        toast("Enter a valid email 🤷‍♂️","", "red", "white");
       } else if (errorCode == "auth/missing-password") {
-        toast("Passsword cannot be blank", "red", "white");
+        toast("Passsword cannot be blank","", "red", "white");
       } else if (errorCode == "auth/missing-email") {
-        toast("Email cannot be blank", "red", "white");
+        toast("Email cannot be blank","", "red", "white");
       } else if (errorCode == "auth/weak-password") {
-        toast("Enter a strong passsword", "yellow", "white");
+        toast("Enter a strong passsword","", "yellow", "white");
       } else if (errorCode == "auth/email-already-in-use") {
         toast(
           "Email already in use, proceed to log in page",
+          "",
           "grey",
           "white"
         );
       } else if (errorCode == "auth/network-request-failed") {
         toast(
           "Network issue! Don't fret, check your connectivity and refresh 👌",
+          "",
           "yellow",
           "white"
         );
@@ -212,6 +215,7 @@ submitDetails.addEventListener('click', () => {
        else if (errorCode == "auth/internal-error") {
          toast(
            "Something went wrong refresh 👌",
+           "",
            "yellow",
            "white"
          );
