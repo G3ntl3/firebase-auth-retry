@@ -34,6 +34,8 @@ const database = getDatabase(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    console.log(user);
+    
     disp.innerHTML = `<p> sup ${user.displayName}</p>`;
   } else {
     window.location.href = "index.html";
