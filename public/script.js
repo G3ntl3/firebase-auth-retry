@@ -39,6 +39,7 @@ Toastify({
   text: text,
   duration: 3000,
   close: true,
+  destination:destination,
   gravity: "top", // `top` or `bottom`
   position: "center", // `left`, `center` or `right`
   stopOnFocus: true, // Prevents dismissing of toast on hover
