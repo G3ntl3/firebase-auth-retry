@@ -78,18 +78,26 @@ onAuthStateChanged(auth, (user) => {
         displayNotes.innerHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <h1>${eachNote.nameOfInUser}</h1>
+            <small>${eachNote.nameOfInUser}</small>
 
-                        <p class="card-text">${eachNote.noteTitle}</p>
+                        <p class="card-text"></p>
 <hr>
+                    <h6 class="card-title">${eachNote.noteTitle}</h6>
             <p class="card-text">${eachNote.noteEntered}</p>
             <small>${eachNote.time}</small>
 
-            <button class="bg-primary"  id='editBtn'>Edit</button>
-
-<button class="bg-danger" id='deleteBtn'>Delete</button>
           </div>
         </div>
+
+        <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card note-card fade-up">
+                        <div class="card-body">
+                            <h6 class="card-title">${eachNote.noteTitle}</h6>
+                            <p class="card-text">${eachNote.noteEntered}</p>
+                             <small>${eachNote.time}</small>
+                        </div>
+                    </div>
+                </div>
       `;
       });
     } else {
