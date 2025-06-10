@@ -199,8 +199,8 @@ submitDetails.addEventListener('click', () => {
         toast("Enter a strong passsword","", "yellow", "white");
       } else if (errorCode == "auth/email-already-in-use") {
         toast(
-          "Email already in use, proceed to log in page",
-          "",
+          "Email already in use, click to proceed to log in page",
+          "https://firebase-auth-retry.vercel.app/logIn.html",
           "grey",
           "white"
         );
