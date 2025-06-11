@@ -36,10 +36,8 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
 
 
-    const profileImg = document.getElementById("profileImg");
-    if (user.photoURL) {
-      profileImg.src = user.photoURL;
-    }
+    imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
+
     console.log(user);
     
     // disp.innerHTML = `<p> sup ${user.displayName}</p>`;
