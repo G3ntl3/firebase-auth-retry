@@ -86,8 +86,8 @@ imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
             <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
                     <div class="card note-card fade-up">
                         <div class="card-body">
-                            <h6 class="card-title">${eachNote.noteTitle}</h6>
-                            <p class="card-text">${eachNote.noteEntered}</p>
+                            <h6 class="card-title">${ noteTitle.value== eachNote.noteTitle}</h6>
+                            <p class="card-text">${noteEntered.value== eachNote.noteEntered}</p>
                              <small>${eachNote.time}</small>
                         </div>
                     </div>
