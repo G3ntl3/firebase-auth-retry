@@ -12,6 +12,8 @@ import {
   ref,
   push,
   onValue,
+  set,
+  remove,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -110,9 +112,9 @@ onAuthStateChanged(auth, (user) => {
     // Reset for next note
     selectedImageKey = "";
     selectedImageDataUrl = "";
-    noteEntered.value = '';
-    noteTitle.value = '';
-    noteImageInput.value = '';
+    noteEntered.value = "";
+    noteTitle.value = "";
+    noteImageInput.value = "";
   });
 
   // Display notes
@@ -141,67 +143,65 @@ onAuthStateChanged(auth, (user) => {
             </div>
           </div>
         `;
+      });
 
-        // After rendering all notes
-        document.querySelectorAll(".edit-note-btn").forEach((btn) => {
-          btn.addEventListener("click", function () {
-            const noteKey = this.getAttribute("data-key");
-            const note = data[noteKey];
-            document.getElementById("editNoteTitle").value = note.noteTitle;
-            document.getElementById("editNoteEntered").value = note.noteEntered;
-            document
-              .getElementById("saveEditBtn")
-              .setAttribute("data-key", noteKey);
-            document
-              .getElementById("deleteNoteBtn")
-              .setAttribute("data-key", noteKey);
-            // Show modal
-            const modal = new bootstrap.Modal(
-              document.getElementById("editNoteModal")
-            );
-            modal.show();
-          });
+      // Add event listeners AFTER rendering all notes
+      document.querySelectorAll(".edit-note-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const noteKey = this.getAttribute("data-key");
+          const note = data[noteKey];
+          document.getElementById("editNoteTitle").value = note.noteTitle;
+          document.getElementById("editNoteEntered").value = note.noteEntered;
+          document
+            .getElementById("saveEditBtn")
+            .setAttribute("data-key", noteKey);
+          document
+            .getElementById("deleteNoteBtn")
+            .setAttribute("data-key", noteKey);
+          const modal = new bootstrap.Modal(
+            document.getElementById("editNoteModal")
+          );
+          modal.show();
         });
-
-        // Save changes
-        document
-          .getElementById("saveEditBtn")
-          .addEventListener("click", function () {
-            const noteKey = this.getAttribute("data-key");
-            const newTitle = document.getElementById("editNoteTitle").value;
-            const newContent = document.getElementById("editNoteEntered").value;
-            const noteRef = ref(
-              database,
-              `noteStorage/${auth.currentUser.uid}/${noteKey}`
-            );
-            // Update in Firebase
-            set(noteRef, {
-              ...data[noteKey],
-              noteTitle: newTitle,
-              noteEntered: newContent,
-            });
-            bootstrap.Modal.getInstance(
-              document.getElementById("editNoteModal")
-            ).hide();
-          });
-
-        // Delete note
-        document
-          .getElementById("deleteNoteBtn")
-          .addEventListener("click", function () {
-            const noteKey = this.getAttribute("data-key");
-            const noteRef = ref(
-              database,
-              `noteStorage/${auth.currentUser.uid}/${noteKey}`
-            );
-            remove(noteRef);
-            bootstrap.Modal.getInstance(
-              document.getElementById("editNoteModal")
-            ).hide();
-          });
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
     }
   });
+
+  // Save changes
+  document.getElementById("saveEditBtn").addEventListener("click", function () {
+    const noteKey = this.getAttribute("data-key");
+    const newTitle = document.getElementById("editNoteTitle").value;
+    const newContent = document.getElementById("editNoteEntered").value;
+    const noteRef = ref(
+      database,
+      `noteStorage/${auth.currentUser.uid}/${noteKey}`
+    );
+
+    set(noteRef, {
+      ...data[noteKey],
+      noteTitle: newTitle,
+      noteEntered: newContent,
+    });
+
+    bootstrap.Modal.getInstance(
+      document.getElementById("editNoteModal")
+    ).hide();
+  });
+
+  // Delete note
+  document
+    .getElementById("deleteNoteBtn")
+    .addEventListener("click", function () {
+      const noteKey = this.getAttribute("data-key");
+      const noteRef = ref(
+        database,
+        `noteStorage/${auth.currentUser.uid}/${noteKey}`
+      );
+      remove(noteRef);
+      bootstrap.Modal.getInstance(
+        document.getElementById("editNoteModal")
+      ).hide();
+    });
 });
