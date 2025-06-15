@@ -44,6 +44,9 @@ const displayNotes = document.getElementById("displayNotes");
 let selectedImageKey = "";
 let selectedImageDataUrl = "";
 
+// New variable to store current note data for editing
+let currentNoteData = null;
+
 // Open file picker on image button click
 imgBtn.addEventListener("click", () => {
   noteImageInput.click();
@@ -82,9 +85,6 @@ onAuthStateChanged(auth, (user) => {
         .then(() => {})
         .catch((error) => {
           console.log(error);
-        });
-    }, 1000);
-  });
 
   // Add note
   addNote.addEventListener("click", () => {
