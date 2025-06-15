@@ -32,6 +32,7 @@ coverage
 # nyc test coverage
 .nyc_output
 
+temp_auto_push.bat
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
@@ -67,3 +68,5 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+.gitignore
+branch_structure.json
