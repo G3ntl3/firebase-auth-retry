@@ -314,18 +314,17 @@
               <button class="btn btn-outline-secondary btn-icon" type="button" title="Settings">
                   <i class="fas fa-cog"></i>
               </button>
-              <button><a class="dropdown-item" id="signOutbtn"><i class="fas fa-sign-out-alt me-2" ></i> Sign out</a></button>
+              <!-- signout btn  -->
+              <button><a class="dropdown-item" id="signOutbtn">
+                <i class="fas fa-sign-out-alt me-2"></i> Sign out
+              </a></button>
               
               <!-- Dropdown for Grid Options -->
               <div class="dropdown">
                   <button class="btn btn-outline-secondary btn-icon" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Grid view">
                       <i class="fas fa-th-large"></i>
                   </button>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-th-large me-2"></i> Large</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-th me-2"></i> Medium</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-grip-lines me-2"></i> Small</a></li>
-                  </ul>
+                  
               </div>
               <!-- Profile Dropdown -->
               <div class="dropdown">
@@ -333,16 +332,10 @@
         id="imgBtn"
         aria-expanded="false" title="Account">
     <img id="profileImg" src="default.png" alt="profile" width="28" height="28" style="border-radius:50%;">
-    <i class="fas fa-caret-down ms-1"></i>
 </button>
                   
 
-                  <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> Profile</a></li>
-                      <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Settings</a></li>
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" id="signOutbtn"><i class="fas fa-sign-out-alt me-2" ></i> Sign out</a></li>
-                  </ul>
+
               </div>
           </div>
       </div>

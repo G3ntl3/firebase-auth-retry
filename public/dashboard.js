@@ -86,12 +86,12 @@ onAuthStateChanged(auth, (user) => {
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
-        alert(eachNote.noteEntered);
+   
         displayNotes.innerHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
-                    <div class="card note-card fade-up">
+                    <div class="card note-card fade-up bg-dark text-white">
                         <div class="card-body ">
                             <h6 class="card-title">${eachNote.noteTitle}</h6>
 <p class="card-text">${eachNote.noteEntered}</p>
