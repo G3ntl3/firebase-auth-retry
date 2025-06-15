@@ -121,7 +121,7 @@ onAuthStateChanged(auth, (user) => {
     let data = snapshot.val();
     displayNotes.innerHTML = "";
     if (data) {
-      Object.values(data).forEach(([key, eachNote]) => {
+      Object.entries(data).forEach(([key, eachNote]) => {
         let imgTag = "";
         if (eachNote.imageKey) {
           const imgData = localStorage.getItem(eachNote.imageKey);
