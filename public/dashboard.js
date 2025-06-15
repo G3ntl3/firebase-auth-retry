@@ -144,11 +144,9 @@ onAuthStateChanged(auth, (user) => {
     <small>${eachNote.time}</small>
     <div class="d-flex gap-2 mt-2">
       <button class="btn btn-sm btn-outline-light edit-note-btn" data-key="${key}">
-        <i class="fas fa-edit"></i>
+        <i class="fas fa-edit"></i><i class="fas fa-trash"></i>
       </button>
-      <button class="btn btn-sm btn-outline-danger delete-note-btn" data-key="${key}">
-        <i class="fas fa-trash"></i>
-      </button>
+     
     </div>
   </div>
 </div>
