@@ -85,25 +85,25 @@ onAuthStateChanged(auth, (user) => {
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
-        console.log(eachNote);
-        displayNotes.innerHTML += `
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
-                    <div class="card note-card fade-up">
-                        <div class="card-body bg-dark ">
-                            <h6 class="card-title">${eachNote.noteTitle}</h6>
-<p class="card-text">${eachNote.noteEntered}</p>
-                             <small>${eachNote.time}</small>
-                        </div>
-                    </div>
-                </div>
+        alert(eachNote);
+//         displayNotes.innerHTML += `
+//         <div class="card" style="width: 18rem;">
+//           <div class="card-body">
+//             <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
+//                     <div class="card note-card fade-up">
+//                         <div class="card-body bg-dark ">
+//                             <h6 class="card-title">${eachNote.noteTitle}</h6>
+// <p class="card-text">${eachNote.noteEntered}</p>
+//                              <small>${eachNote.time}</small>
+//                         </div>
+//                     </div>
+//                 </div>
 
-          </div>
-        </div>
+//           </div>
+//         </div>
 
         
-      `;
+//       `;
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
