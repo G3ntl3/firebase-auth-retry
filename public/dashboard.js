@@ -34,25 +34,30 @@ const database = getDatabase(app);
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
+    imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
 
+    const profileImg = document.getElementById("profileImg");
+    if (user.photoURL) {
+      profileImg.src = user.photoURL;
+    }
 
-imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
     console.log(user);
-    
+
     // disp.innerHTML = `<p> sup ${user.displayName}</p>`;
   } else {
     window.location.href = "index.html";
     console.log("user is not signed in");
   }
 
- document.getElementById ('signOutbtn').addEventListener("click", () => {
+  document.getElementById("signOutbtn").addEventListener("click", () => {
     signOut(auth)
       .then(() => {
         console.log("sign out success");
       })
       .catch((error) => {
         console.log(error);
-      }); w
+      });
+    w;
   });
 
   // function for adding note
@@ -80,25 +85,25 @@ imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
-        alert(eachNote.noteEntered)
-      //   displayNotes.innerHTML += `
-      //   <div class="card" style="width: 18rem;">
-      //     <div class="card-body">
-      //       <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
-      //               <div class="card note-card fade-up">
-      //                   <div class="card-body">
-      //                       <h6 class="card-title">${  eachNote.noteTitle}</h6>
-      //                       <p class="card-text">${eachNote.noteEntered}</p>
-      //                        <small>${eachNote.time}</small>
-      //                   </div>
-      //               </div>
-      //           </div>
+        alert(eachNote.noteEntered);
+//         displayNotes.innerHTML += `
+//         <div class="card" style="width: 18rem;">
+//           <div class="card-body">
+//             <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
+//                     <div class="card note-card fade-up">
+//                         <div class="card-body bg-dark ">
+//                             <h6 class="card-title">${eachNote.noteTitle}</h6>
+// <p class="card-text">${eachNote.noteEntered}</p>
+//                              <small>${eachNote.time}</small>
+//                         </div>
+//                     </div>
+//                 </div>
 
-      //     </div>
-      //   </div>
+//           </div>
+//         </div>
 
         
-      // `;
+//       `;
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
