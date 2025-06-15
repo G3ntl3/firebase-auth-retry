@@ -106,6 +106,9 @@ onAuthStateChanged(auth, (user) => {
 
         
       `;
+        noteEntered.value = ''
+        noteTitle.value=''
+        
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
