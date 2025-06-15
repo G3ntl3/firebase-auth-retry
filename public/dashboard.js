@@ -90,13 +90,9 @@ onAuthStateChanged(auth, (user) => {
           <div class="card-body">
             <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
                     <div class="card note-card fade-up">
-                        <div class="card-body">
-                            <h6 class="card-title">${
-                              eachNote.noteTitle
-                            }</h6>
-                            <p class="card-text">${
-                              eachNote.noteEntered
-                            }</p>
+                        <div class="card-body bg-dark ">
+                            <h6 class="card-title">${eachNote.noteTitle}</h6>
+<p class="card-text">${eachNote.noteEntered}</p>
                              <small>${eachNote.time}</small>
                         </div>
                     </div>
