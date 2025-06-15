@@ -85,6 +85,7 @@ onAuthStateChanged(auth, (user) => {
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
+        console.log(eachNote);
         displayNotes.innerHTML += `
         <div class="card" style="width: 18rem;">
           <div class="card-body">
