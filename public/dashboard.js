@@ -10,7 +10,6 @@ import {
 import {
   getDatabase,
   ref,
-  set,
   push,
   onValue,
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
@@ -31,28 +30,51 @@ const app =
 
 const auth = getAuth();
 const database = getDatabase(app);
+// ...existing imports and Firebase config...
+
 const imgBtn = document.querySelector('button[title="Add image"]');
 const noteImageInput = document.getElementById("noteImageInput");
+const addNote = document.getElementById("addNote");
+const noteTitle = document.getElementById("noteTitle");
+const noteEntered = document.getElementById("noteEntered");
+const displayNotes = document.getElementById("displayNotes");
+
+let selectedImageKey = "";
+let selectedImageDataUrl = "";
+
+// Open file picker on image button click
+imgBtn.addEventListener("click", () => {
+  noteImageInput.click();
+});
+
+// Handle image selection and store data in variables
+noteImageInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      selectedImageDataUrl = e.target.result;
+      selectedImageKey = "note-img-" + Date.now();
+      // Do NOT save to localStorage here!
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
-
-    const profileImg = document.getElementById("profileImg");
-    if (user.photoURL) {
-      profileImg.src = user.photoURL;
-    }
-
-    console.log(user);
-
-    // disp.innerHTML = `<p> sup ${user.displayName}</p>`;
-  } else {
+  if (!user) {
     window.location.href = "index.html";
-    console.log("user is not signed in");
+    return;
+  }
+
+  // Profile image (optional)
+  const profileImg = document.getElementById("profileImg");
+  if (profileImg && user.photoURL) {
+    profileImg.src = user.photoURL;
   }
 
   document.getElementById("signOutbtn").addEventListener("click", () => {
     alert("signing you out...");
-
     setTimeout(() => {
       signOut(auth)
         .then(() => {})
@@ -62,83 +84,61 @@ onAuthStateChanged(auth, (user) => {
     }, 1000);
   });
 
-  // function for image
-
-  const imgBtn = document.querySelector('button[title="Add image"]');
-  const noteImageInput = document.getElementById("noteImageInput");
-
-  imgBtn.addEventListener("click", () => {
-    noteImageInput.click();
-  });
-
-  let selectedImageKey = "";
-  let selectedImageDataUrl = "";
-
-  noteImageInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        selectedImageDataUrl = e.target.result; // base64 image string
-        // Generate a unique key for this image
-        selectedImageKey = "note-img-" + Date.now();
-        // Save to localStorage
-        localStorage.setItem(selectedImageKey, selectedImageDataUrl);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // function for adding note
-
+  // Add note
   addNote.addEventListener("click", () => {
+    if (!noteTitle.value.trim() && !noteEntered.value.trim()) {
+      alert("Please enter a note title or content!");
+      return;
+    }
     let databaseRef = ref(database, `noteStorage/${user.uid}`);
     const date = new Date();
+
+    // Save image to localStorage only if there is an image
+    if (selectedImageKey && selectedImageDataUrl) {
+      localStorage.setItem(selectedImageKey, selectedImageDataUrl);
+    }
 
     let noteObject = {
       noteTitle: noteTitle.value,
       noteEntered: noteEntered.value,
-      nameOfInUser: auth.currentUser.displayName,
-      image: selectedImageDataUrl,
-
+      nameOfInUser: user.displayName,
+      imageKey: selectedImageKey, // Save only the key
       time: date.toLocaleTimeString(),
     };
     push(databaseRef, noteObject);
-    // display info from the databse
 
-    // alert(noteEntered.value)
-
-    // noteEntered.value = " ";
-    // <img src="..." class="card-img-top" alt="...">
+    // Reset for next note
+    selectedImageKey = "";
+    selectedImageDataUrl = "";
+    noteEntered.value = '';
+    noteTitle.value = '';
+    noteImageInput.value = '';
   });
+
+  // Display notes
   let noteref = ref(database, `noteStorage/${user.uid}`);
   onValue(noteref, (snapshot) => {
     let data = snapshot.val();
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
-        //  alert(eachNote.noteEntered)
+        let imgTag = "";
+        if (eachNote.imageKey) {
+          const imgData = localStorage.getItem(eachNote.imageKey);
+          if (imgData) {
+            imgTag = `<img src="${imgData}" class="card-img-top" style="max-height:120px;object-fit:cover;">`;
+          }
+        }
         displayNotes.innerHTML += `
-        <div class="card mx-1 bg-dark text-light" style="width: 18rem;">
-          <div class="card-body">
-            <div class="col-lg-3 col-md-4 col-sm-6" style="width: 18rem;>
-                    <div class="card note-card fade-up bg-dark text-white">
-                        <div class="card-body ">
-                            <h6 class="card-title">${eachNote.noteTitle}</h6>
-<p class="card-text">${eachNote.noteEntered}</p>
-                             <small>${eachNote.time}</small>
-                        </div>
-                    </div>
-                </div>
-
+          <div class="card mx-1 bg-dark text-light" style="width: 18rem;">
+            <div class="card-body">
+              ${imgTag}
+              <h6 class="card-title">${eachNote.noteTitle}</h6>
+              <p class="card-text">${eachNote.noteEntered}</p>
+              <small>${eachNote.time}</small>
+            </div>
           </div>
-                </div>
-        
-
-        
-      `;
-        noteEntered.value = "";
-        noteTitle.value = "";
+        `;
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
