@@ -121,7 +121,7 @@ onAuthStateChanged(auth, (user) => {
     let data = snapshot.val();
     displayNotes.innerHTML = "";
     if (data) {
-      Object.values(data).forEach((eachNote) => {
+      Object.values(data).forEach(([key, eachNote]) => {
         let imgTag = "";
         if (eachNote.imageKey) {
           const imgData = localStorage.getItem(eachNote.imageKey);
@@ -136,9 +136,69 @@ onAuthStateChanged(auth, (user) => {
               <h6 class="card-title">${eachNote.noteTitle}</h6>
               <p class="card-text">${eachNote.noteEntered}</p>
               <small>${eachNote.time}</small>
+                      <button class="btn btn-sm btn-outline-light edit-note-btn mt-2" data-key="${key}">Edit</button>
+
             </div>
           </div>
         `;
+
+        // After rendering all notes
+        document.querySelectorAll(".edit-note-btn").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const noteKey = this.getAttribute("data-key");
+            const note = data[noteKey];
+            document.getElementById("editNoteTitle").value = note.noteTitle;
+            document.getElementById("editNoteEntered").value = note.noteEntered;
+            document
+              .getElementById("saveEditBtn")
+              .setAttribute("data-key", noteKey);
+            document
+              .getElementById("deleteNoteBtn")
+              .setAttribute("data-key", noteKey);
+            // Show modal
+            const modal = new bootstrap.Modal(
+              document.getElementById("editNoteModal")
+            );
+            modal.show();
+          });
+        });
+
+        // Save changes
+        document
+          .getElementById("saveEditBtn")
+          .addEventListener("click", function () {
+            const noteKey = this.getAttribute("data-key");
+            const newTitle = document.getElementById("editNoteTitle").value;
+            const newContent = document.getElementById("editNoteEntered").value;
+            const noteRef = ref(
+              database,
+              `noteStorage/${auth.currentUser.uid}/${noteKey}`
+            );
+            // Update in Firebase
+            set(noteRef, {
+              ...data[noteKey],
+              noteTitle: newTitle,
+              noteEntered: newContent,
+            });
+            bootstrap.Modal.getInstance(
+              document.getElementById("editNoteModal")
+            ).hide();
+          });
+
+        // Delete note
+        document
+          .getElementById("deleteNoteBtn")
+          .addEventListener("click", function () {
+            const noteKey = this.getAttribute("data-key");
+            const noteRef = ref(
+              database,
+              `noteStorage/${auth.currentUser.uid}/${noteKey}`
+            );
+            remove(noteRef);
+            bootstrap.Modal.getInstance(
+              document.getElementById("editNoteModal")
+            ).hide();
+          });
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
