@@ -31,7 +31,8 @@ const app =
 
 const auth = getAuth();
 const database = getDatabase(app);
-
+const imgBtn = document.querySelector('button[title="Add image"]');
+const noteImageInput = document.getElementById("noteImageInput");
 onAuthStateChanged(auth, (user) => {
   if (user) {
     imgBtn.innerHTML = `<img src=${user.photoURL} alt="" width='20' height='20'> `;
@@ -50,26 +51,56 @@ onAuthStateChanged(auth, (user) => {
   }
 
   document.getElementById("signOutbtn").addEventListener("click", () => {
-    signOut(auth)
-      .then(() => {
-        console.log("sign out success");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    w;
+    alert("signing you out...");
+
+    setTimeout(() => {
+      signOut(auth)
+        .then(() => {})
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 1000);
+  });
+
+  // function for image
+
+  const imgBtn = document.querySelector('button[title="Add image"]');
+  const noteImageInput = document.getElementById("noteImageInput");
+
+  imgBtn.addEventListener("click", () => {
+    noteImageInput.click();
+  });
+
+  let selectedImageKey = "";
+  let selectedImageDataUrl = "";
+
+  noteImageInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        selectedImageDataUrl = e.target.result; // base64 image string
+        // Generate a unique key for this image
+        selectedImageKey = "note-img-" + Date.now();
+        // Save to localStorage
+        localStorage.setItem(selectedImageKey, selectedImageDataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
   });
 
   // function for adding note
 
-  
   addNote.addEventListener("click", () => {
     let databaseRef = ref(database, `noteStorage/${user.uid}`);
     const date = new Date();
+
     let noteObject = {
       noteTitle: noteTitle.value,
       noteEntered: noteEntered.value,
       nameOfInUser: auth.currentUser.displayName,
+      image: selectedImageDataUrl,
+
       time: date.toLocaleTimeString(),
     };
     push(databaseRef, noteObject);
@@ -86,7 +117,7 @@ onAuthStateChanged(auth, (user) => {
     displayNotes.innerHTML = "";
     if (data) {
       Object.values(data).forEach((eachNote) => {
-  //  alert(eachNote.noteEntered)
+        //  alert(eachNote.noteEntered)
         displayNotes.innerHTML += `
         <div class="card mx-1 bg-dark text-light" style="width: 18rem;">
           <div class="card-body">
@@ -106,9 +137,8 @@ onAuthStateChanged(auth, (user) => {
 
         
       `;
-        noteEntered.value = ''
-        noteTitle.value=''
-        
+        noteEntered.value = "";
+        noteTitle.value = "";
       });
     } else {
       displayNotes.innerHTML = "<p>No notes yet.</p>";
