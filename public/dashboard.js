@@ -85,6 +85,9 @@ onAuthStateChanged(auth, (user) => {
         .then(() => {})
         .catch((error) => {
           console.log(error);
+        });
+    }, 500);
+  });
 
   // Add note
   addNote.addEventListener("click", () => {
@@ -132,32 +135,34 @@ onAuthStateChanged(auth, (user) => {
           }
         }
         displayNotes.innerHTML += `
-          <div class="card mx-1 bg-dark text-light" style="width: 18rem;">
+          <div class="card mx-1 bg-dark text-light note-card" style="width: 18rem;">
             <div class="card-body">
               ${imgTag}
               <h6 class="card-title">${eachNote.noteTitle}</h6>
               <p class="card-text">${eachNote.noteEntered}</p>
               <small>${eachNote.time}</small>
-                      <button class="btn btn-sm btn-outline-light edit-note-btn mt-2" data-key="${key}">Edit</button>
-
+              <button class="btn btn-sm btn-outline-light edit-note-btn mt-2" data-key="${key}">Edit</button>
             </div>
           </div>
         `;
       });
 
-      // Add event listeners AFTER rendering all notes
+      // Add edit button listeners
       document.querySelectorAll(".edit-note-btn").forEach((btn) => {
         btn.addEventListener("click", function () {
           const noteKey = this.getAttribute("data-key");
-          const note = data[noteKey];
-          document.getElementById("editNoteTitle").value = note.noteTitle;
-          document.getElementById("editNoteEntered").value = note.noteEntered;
-          document
-            .getElementById("saveEditBtn")
-            .setAttribute("data-key", noteKey);
-          document
-            .getElementById("deleteNoteBtn")
-            .setAttribute("data-key", noteKey);
+          currentNoteData = {
+            ...data[noteKey],
+            key: noteKey,
+          };
+
+          // Fill modal with note data
+          document.getElementById("editNoteTitle").value =
+            currentNoteData.noteTitle;
+          document.getElementById("editNoteEntered").value =
+            currentNoteData.noteEntered;
+
+          // Show modal
           const modal = new bootstrap.Modal(
             document.getElementById("editNoteModal")
           );
@@ -171,37 +176,42 @@ onAuthStateChanged(auth, (user) => {
 
   // Save changes
   document.getElementById("saveEditBtn").addEventListener("click", function () {
-    const noteKey = this.getAttribute("data-key");
-    const newTitle = document.getElementById("editNoteTitle").value;
-    const newContent = document.getElementById("editNoteEntered").value;
+    if (!currentNoteData) return;
+
     const noteRef = ref(
       database,
-      `noteStorage/${auth.currentUser.uid}/${noteKey}`
+      `noteStorage/${auth.currentUser.uid}/${currentNoteData.key}`
     );
+    const updatedNote = {
+      ...currentNoteData,
+      noteTitle: document.getElementById("editNoteTitle").value,
+      noteEntered: document.getElementById("editNoteEntered").value,
+      time: new Date().toLocaleTimeString(),
+    };
 
-    set(noteRef, {
-      ...data[noteKey],
-      noteTitle: newTitle,
-      noteEntered: newContent,
+    set(noteRef, updatedNote).then(() => {
+      const modal = bootstrap.Modal.getInstance(
+        document.getElementById("editNoteModal")
+      );
+      modal.hide();
     });
-
-    bootstrap.Modal.getInstance(
-      document.getElementById("editNoteModal")
-    ).hide();
   });
 
   // Delete note
   document
     .getElementById("deleteNoteBtn")
     .addEventListener("click", function () {
-      const noteKey = this.getAttribute("data-key");
+      if (!currentNoteData) return;
+
       const noteRef = ref(
         database,
-        `noteStorage/${auth.currentUser.uid}/${noteKey}`
+        `noteStorage/${auth.currentUser.uid}/${currentNoteData.key}`
       );
-      remove(noteRef);
-      bootstrap.Modal.getInstance(
-        document.getElementById("editNoteModal")
-      ).hide();
+      remove(noteRef).then(() => {
+        const modal = bootstrap.Modal.getInstance(
+          document.getElementById("editNoteModal")
+        );
+        modal.hide();
+      });
     });
 });
