@@ -134,17 +134,25 @@ onAuthStateChanged(auth, (user) => {
             imgTag = `<img src="${imgData}" class="card-img-top" style="max-height:120px;object-fit:cover;">`;
           }
         }
+      //  display my note in the dashboard
         displayNotes.innerHTML += `
-          <div class="card mx-1 bg-dark text-light note-card" style="width: 18rem;">
-            <div class="card-body">
-              ${imgTag}
-              <h6 class="card-title">${eachNote.noteTitle}</h6>
-              <p class="card-text">${eachNote.noteEntered}</p>
-              <small>${eachNote.time}</small>
-              <button class="btn btn-sm btn-outline-light edit-note-btn mt-2" data-key="${key}">Edit</button>
-            </div>
-          </div>
-        `;
+<div class="card mx-1 bg-dark text-light note-card" style="width: 18rem;">
+  <div class="card-body">
+    ${imgTag}
+    <h6 class="card-title">${eachNote.noteTitle}</h6>
+    <p class="card-text">${eachNote.noteEntered}</p>
+    <small>${eachNote.time}</small>
+    <div class="d-flex gap-2 mt-2">
+      <button class="btn btn-sm btn-outline-light edit-note-btn" data-key="${key}">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button class="btn btn-sm btn-outline-danger delete-note-btn" data-key="${key}">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
+`;
       });
 
       // Add edit button listeners
@@ -197,7 +205,7 @@ onAuthStateChanged(auth, (user) => {
     });
   });
 
-  // Delete note
+  //  function to Delete note
   document
     .getElementById("deleteNoteBtn")
     .addEventListener("click", function () {
