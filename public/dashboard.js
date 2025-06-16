@@ -60,7 +60,12 @@ noteImageInput.addEventListener("change", function () {
     reader.onload = function (e) {
       selectedImageDataUrl = e.target.result;
       selectedImageKey = "note-img-" + Date.now();
-      // Do NOT save to localStorage here!
+
+      // Show image preview
+      const imagePreview = document.getElementById("imagePreview");
+      const selectedImage = document.getElementById("selectedImage");
+      selectedImage.src = selectedImageDataUrl;
+      imagePreview.style.display = "block";
     };
     reader.readAsDataURL(file);
   }
