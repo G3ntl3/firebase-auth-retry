@@ -20,6 +20,16 @@
     />
 
     <style>
+      #imagePreview {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+      }
+
+      #selectedImage {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
       :root {
         --keep-bg: #202124;
         --keep-surface: #2d2e30;
@@ -487,6 +497,26 @@
                     </button>
                   </div>
                 </div>
+              </div>
+              <!-- Add this div for image preview -->
+              <div id="imagePreview" style="display: none; margin: 1rem">
+                <img
+                  id="selectedImage"
+                  class="img-fluid rounded"
+                  style="
+                    max-height: 200px;
+                    width: auto;
+                    display: block;
+                    margin: 0 auto;
+                  "
+                />
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger mt-2"
+                  id="removePreview"
+                >
+                  <i class="fas fa-times"></i> Remove Image
+                </button>
               </div>
             </div>
           </div>
