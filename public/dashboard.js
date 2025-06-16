@@ -94,6 +94,8 @@ onAuthStateChanged(auth, (user) => {
     }, 500);
   });
 
+
+  
   // Add note
   addNote.addEventListener("click", () => {
     if (!noteTitle.value.trim() && !noteEntered.value.trim()) {
