@@ -134,7 +134,7 @@ onAuthStateChanged(auth, (user) => {
             imgTag = `<img src="${imgData}" class="card-img-top" style="max-height:120px;object-fit:cover;">`;
           }
         }
-      //  display my note in the dashboard
+        //  display my note in the dashboard
         displayNotes.innerHTML += `
 <div class="card mx-1 bg-dark text-light note-card" style="width: 18rem;">
   <div class="card-body">
@@ -220,4 +220,26 @@ onAuthStateChanged(auth, (user) => {
         modal.hide();
       });
     });
+
+  // Add search functionality after notes are rendered
+  const searchInputs = document.querySelectorAll('input[type="search"]');
+  searchInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      const searchTerm = this.value.toLowerCase();
+      const noteCards = document.querySelectorAll(".note-card");
+
+      noteCards.forEach((card) => {
+        const title =
+          card.querySelector(".card-title")?.textContent.toLowerCase() || "";
+        const content =
+          card.querySelector(".card-text")?.textContent.toLowerCase() || "";
+
+        if (title.includes(searchTerm) || content.includes(searchTerm)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
 });
